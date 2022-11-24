@@ -69,8 +69,8 @@ class _MyAppState extends State<QuizApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    
+      return Scaffold(
         appBar: AppBar(title: Text('My first app',),centerTitle: true,backgroundColor: Colors.redAccent,),
         body: _questionIndex < _questions.length
             ? Quiz(
@@ -79,7 +79,6 @@ class _MyAppState extends State<QuizApp> {
                 questions: _questions,
               )
             : Result(_totalScore,_resetQuiz),
-      ),
-    );
+      );
   }
 }

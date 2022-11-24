@@ -7,10 +7,6 @@ import './world_time/World_time_pages/home.dart';
 import './world_time/World_time_pages/loading.dart';
 import './world_time/world_time_services/world_time.dart';
 
-
-
-
-
 void main() {
   runApp(const MyApp());
 }
@@ -21,17 +17,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes : {
-      '/loading' : (context)=> const Loading(),
-      '/quiz_app' :(context) => QuizApp(),
-      '/expenses_app':(context) => PeHomePage(),
-      '/home':(context) => Home(),
-      '/location':(context) => ChooseLocation()
-    },
+      routes: {
+        '/loading': (context) => const Loading(),
+        '/quiz_app': (context) => QuizApp(),
+        '/expenses_app': (context) => PeHomePage(),
+        '/home': (context) => Home(),
+        '/location': (context) => ChooseLocation()
+      },
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.cyan,
+          accentColor: Colors.amber,
+          fontFamily: 'Quicksand',
+          appBarTheme: AppBarTheme(
+            titleTextStyle: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black
+            )
+          )),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -55,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
           'My Apps',
         ),
         centerTitle: true,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Center(
         child: Padding(

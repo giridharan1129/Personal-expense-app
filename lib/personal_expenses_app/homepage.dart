@@ -3,34 +3,56 @@ import 'package:flutter/material.dart';
 import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
 import './models/transaction.dart';
+import './widgets/chart.dart';
 
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Personal Expenses',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      home: PeHomePage(),
+    );
+  }
+}
 
 class PeHomePage extends StatefulWidget {
+  // String titleInput;
+  // String amountInput;
   @override
-  State<PeHomePage> createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<PeHomePage> {
-  
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: 't1', 
-        title: 'new dress', 
-        amount: 200, 
-        date: DateTime.now()),
-    Transaction(
-      id: 't2', 
-      title: 'groceries', 
-      amount: 500, 
-      date: DateTime.now())
+    // Transaction(
+    //   id: 't1',
+    //   title: 'New Shoes',
+    //   amount: 690,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Weekly Groceries',
+    //   amount: 1653,
+    //   date: DateTime.now(),
+    // ),
   ];
+   List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx){
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+   }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
-        title: txTitle,
-        amount: txAmount,
-        date: DateTime.now(),
-        id: DateTime.now().toString());
+      title: txTitle,
+      amount: txAmount,
+      date: DateTime.now(),
+      id: DateTime.now().toString(),
+    );
 
     setState(() {
       _userTransactions.add(newTx);
@@ -54,34 +76,31 @@ class _MyHomePageState extends State<PeHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
-        actions: [
+        title: Text('Personal Expenses'),
+        centerTitle: true,
+        actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: (() => _startAddNewTransaction(context)),
-          )
+            onPressed: () => _startAddNewTransaction(context),
+          ),
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Colors.amber,
-                child: Text('chart'),
-              ),
-            ),
-            TransactionList(_userTransactions)
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Chart(_recentTransactions),
+            SizedBox(height: 20,),
+            TransactionList(_userTransactions),
           ],
         ),
       ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: (() => _startAddNewTransaction(context))),
+        child: Icon(Icons.add),
+        onPressed: () => _startAddNewTransaction(context),
+      ),
     );
   }
 }

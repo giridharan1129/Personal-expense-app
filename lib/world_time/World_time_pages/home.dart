@@ -22,10 +22,10 @@ class _HomeState extends State<Home> {
     //set background image
 
     final String bgImage =
-        (data['isDayTime'] ?? false) ? 'day.png' : 'night.png';
+        (data['isDayTime']) ? 'day.png' : 'night.png';
     log(bgImage);
     final Color? bgColor =
-        (data['isDayTime'] ?? false) ? Colors.blue : Colors.red[700];
+        (data['isDayTime']) ? Colors.blue : Colors.red[700];
 
     return Scaffold(
         backgroundColor: bgColor,
