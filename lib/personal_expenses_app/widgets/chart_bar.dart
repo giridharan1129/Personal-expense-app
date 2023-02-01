@@ -13,13 +13,13 @@ class ChartBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('\u{20B9}${spendingAmount.toStringAsFixed(0)}'),
+        Container(height: 20,child: FittedBox(child: Text('\u{20B9}${spendingAmount.toStringAsFixed(0)}'))),
         SizedBox(
           height: 4,
         ),
         Container(
-          height: 60,
-          width: 10,
+          height: 5,
+          width: 60,
           child: Stack(
             children: [
               Container(
@@ -29,10 +29,14 @@ class ChartBar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
               ),
               FractionallySizedBox(
-                heightFactor: spendingPctOfTotal,
+                widthFactor: spendingPctOfTotal,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
+                      gradient: LinearGradient(
+                                              colors: [
+                                                Color.fromARGB(255, 9, 59, 138),
+                                                Color.fromARGB(255, 12, 111, 192)
+                                              ],),
                       borderRadius: BorderRadius.circular(10)),
                 ),
               )
@@ -41,7 +45,8 @@ class ChartBar extends StatelessWidget {
         ),
         SizedBox(
           height: 4,
-        )
+        ),
+        Text('$label')
       ],
     );
   }
