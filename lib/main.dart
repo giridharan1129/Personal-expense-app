@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import './quiz_app/quiz_main.dart';
 import './personal_expenses_app/homepage.dart';
@@ -8,6 +9,9 @@ import './world_time/World_time_pages/loading.dart';
 import './world_time/world_time_services/world_time.dart';
 
 void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations(
+  //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
 
@@ -30,13 +34,11 @@ class MyApp extends StatelessWidget {
           accentColor: Color.fromARGB(255, 127, 255, 7),
           fontFamily: 'Quicksand',
           appBarTheme: AppBarTheme(
-            titleTextStyle: TextStyle(
-              fontFamily: 'OpenSans',
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black
-            )
-          )),
+              titleTextStyle: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black))),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
